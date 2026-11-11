@@ -1,0 +1,66 @@
+====================================================
+FIREBASE / GOOGLE SIGN-IN FINGERPRINTS (paste ONCE)
+====================================================
+
+If your app uses Google Sign-In, paste BOTH fingerprints
+into Firebase Console > Project settings > Your apps >
+Android app > "Add fingerprint". Google Sign-In checks the
+SHA-1: with only the SHA-256 it fails with
+"No credentials available".
+
+Package name: com.webapp.bbliam1fpremier.qu8n
+
+SHA-1:    66:FD:1B:D2:C1:D4:A2:59:53:5D:76:C8:9E:B9:8D:CD:98:0D:C0:C4
+SHA-256:  91:79:57:31:19:D6:B8:14:23:00:E4:29:FA:61:FA:73:6C:D7:22:3D:91:55:68:27:29:77:CC:CB:8C:E7:99:45
+
+You only do this ONCE per app. The same signing key is used
+for every future build. No need to update on each build.
+
+PUBLISHING ON GOOGLE PLAY? Play re-signs your app with its
+own key, so an install from Play has a DIFFERENT fingerprint.
+Play Console > your app > Test and release > App integrity >
+"App signing key certificate": add that SHA-1 and SHA-256
+to the same Firebase Android app too, or sign-in fails for
+everyone who installs from Play.
+
+AppMint Signing Key - README
+============================
+
+Files in this folder:
+
+  upload_cert.pem        - the certificate only (safe to share, use for Play Console reset)
+  signing_key_info.txt   - this file
+
+The private signing key is NOT in Downloads. It stays inside
+AppMint, which signs every build of this app with it. If you
+need the key file (Android Studio or another tool), open the
+Signing Key step and tap "Save my signing key" - you choose
+its password.
+
+--------------------------------------------------
+WHICH FILE GOES WHERE
+--------------------------------------------------
+
+1) NORMAL SIGNED UPLOAD (most users):
+   Just upload the AAB file (app-release.aab) to Play Console.
+   You do NOT need any key file for that.
+
+2) "WRONG UPLOAD KEY" ERROR on Play Console:
+   Go to Play Console > Test and release > App integrity >
+   App signing > Request upload key reset.
+   Upload the "upload_cert.pem" file from this folder.
+   Google reviews within 24-48 hours.
+
+3) USING IN ANDROID STUDIO (advanced):
+   Save the key (Signing Key step > Save my signing key), then
+   Build > Generate Signed Bundle/APK > select that .p12 and
+   enter the password you chose.
+
+--------------------------------------------------
+SECURITY
+--------------------------------------------------
+
+  A saved .p12        - KEEP PRIVATE. Anyone with the file and
+                        its password can sign updates to your app.
+  upload_cert.pem     - Safe to share. Contains only the
+                        public certificate; no private key.
